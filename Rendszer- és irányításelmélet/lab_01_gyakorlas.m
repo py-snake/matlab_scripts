@@ -62,3 +62,33 @@ figure()
 impulse(rendszer, t)
 hold off
 
+%%
+clear all
+close all
+clc
+
+A = [-3, 0.8165, 0;
+    0, -4, 1.5;
+    0, -1.5, -4]
+
+B = [0;
+    0;
+    1.633]
+
+C = [1, 0, 0]
+
+D = [0]
+
+rendszer = ss(A, B, C, D)
+
+sajatertek = eig(A)
+
+% az első sajátérték egy valós szám, ami negatív (emiatt a rendszer stabil lenne)
+% a második és harmadik sajátérték komplex konjugált párt alkot, valós részük negatív, így stabil rendszert eredményeznek
+
+figure()
+step(rendszer)
+
+figure()
+impulse(rendszer)
+
