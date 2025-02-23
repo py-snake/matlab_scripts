@@ -202,3 +202,25 @@ nevezo = conv(conv([3, 1], [5, 1]), [10, 1])
 
 rendszer = tf(szamlalo, nevezo)
 
+%%
+
+clear all
+close all
+clc
+
+z = []
+p = [-3, -4.0000 + 1.5000i, -4.0000 - 1.5000i]
+k = 2
+
+rendszer = zpk(z, p, k)
+
+figure()
+bode(rendszer)
+grid
+
+%%
+
+clear all
+close all
+clc
+
