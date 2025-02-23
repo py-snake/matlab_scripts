@@ -92,3 +92,41 @@ step(rendszer)
 figure()
 impulse(rendszer)
 
+%%
+clear all
+close all
+clc
+
+A = [0, 1, 0;
+    -0.25, 0, 1;
+    0, 0, -4]
+
+B = [0;
+    0;
+    1]
+
+C = [1, 0, 0]
+
+D = [0]
+
+rendszer = ss(A, B, C, D)
+
+sajatertek = eig(A)
+
+figure()
+step(rendszer)
+
+figure()
+impulse(rendszer)
+
+% az egyik sajátérték egy valós szám, ami negatív (emiatt a rendszer stabil lenne)
+% a másik két sajátérték komplex konjugált párt alkot, valós részük éppen nulla, így a rendszer a stabilitás határán van
+
+t = 0:0.1:100;
+figure()
+step(rendszer, t)
+
+figure()
+impulse(rendszer, t)
+
+%%
