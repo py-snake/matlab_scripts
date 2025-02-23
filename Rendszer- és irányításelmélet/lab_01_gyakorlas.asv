@@ -152,42 +152,8 @@ rendszer = ss(A, B, C, D)
 % Mi a karakterisztikus polinom? Mik a rendszer zérusai és pólusai?
 % Ábrázoljuk a pólusokat és a zérusokat a komplex számsíkon. Mennyi a rendszer statikus erősítése?
 
-szamlalo = 2
-nevezo = [1, 11, 42.25, 54.75]
+num = 2
+den = [1, 11, 42.25, 54.75]
 
-rendszer = tf(szamlalo, nevezo)
-
-polusok = pole(rendszer)
-
-gyokok = roots(nevezo)
-
-sajatertek = eig(A)
-
-% az első sajátérték egy valós szám, ami negatív; a második és
-% harmadik sajátérték komplex konjugált párt alkot, valós részük
-% negatív, így stabil rendszert eredményeznek
-
-% az átviteli függvény számlálójának gyökei a zérusok
-% a pólusokhoz hasonlóan a zérusokat is többféleképpen számíthatjuk Matlabban
-% számíthatjuk a zero függvénnyel, amit a teljes rendszerre kell hívni
-
-zerusokv1 = zero(rendszer)
-zerusokv2 = roots(szamlalo)
-
-% mindegyik esetben ugyanazt kapjuk, egy üres vektort, mivel ennek
-% a rendszernek nincsenek zérusai (a számláló csak egy konstans)
-
-% a rendszer pólusait és zérusait a pzmap (pole-zero map) segítségével ábrázolhatjuk; a pólusokat x, a zérusokat o jelöli
-
-figure()
-pzmap(rendszer)
-
-% a rendszer statikus erősítését a dcgain segítségével számíthatjuk
-
-statikus_erosites = dcgain(rendszer)
-
-% a statikus erősítés megmondja, hogy a rendszer ugrásválasza hová áll be állandósult állapotban (ha a rendszer stabil)
-
-figure()
-step(rendszer)
+rendszer = tf(num, den)
 
