@@ -191,3 +191,14 @@ statikus_erosites = dcgain(rendszer)
 figure()
 step(rendszer)
 
+%%
+
+clear al
+close all
+clc
+
+szamlalo = 2
+nevezo = conv(conv([3, 1], [5, 1]), [10, 1])
+
+rendszer = tf(szamlalo, nevezo)
+
