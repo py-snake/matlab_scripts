@@ -1,0 +1,47 @@
+[System]
+Name='int_01_fuzzy_szabalyozo2'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='hofok'
+Range=[0 30]
+NumMFs=3
+MF1='mf1hideg':'trapmf',[-11.0412698412698 -1.09126984126984 10.2587301587302 15.1187301587302]
+MF2='mf2langyos':'trimf',[12.3587301587302 16.3587301587302 21.7857142857143]
+MF3='mf3meleg':'trapmf',[18.8 20.4365079365079 31.2 41.2]
+
+[Input2]
+Name='szobameret'
+Range=[0 200]
+NumMFs=3
+MF1='mf1kisszoba':'trimf',[-83.33 0 83.33]
+MF2='mf2kozepesszoba':'trimf',[16.67 100 183.3]
+MF3='mf3nagyszoba':'trimf',[116.7 200 283.3]
+
+[Output1]
+Name='futesintenzitas'
+Range=[0 1]
+NumMFs=3
+MF1='mf1gyengefutes':'trimf',[-0.419 -0.00265 0.28968253968254]
+MF2='mf2kozepesfutes':'trimf',[0.085978835978836 0.502645502645503 0.919312169312169]
+MF3='mf3erosfutes':'trimf',[0.697089947089947 1.01 1.42]
+
+[Rules]
+1 1, 3 (1) : 1
+1 2, 3 (1) : 1
+1 3, 3 (1) : 1
+2 1, 2 (1) : 1
+2 2, 2 (1) : 1
+2 3, 2 (1) : 1
+3 1, 1 (1) : 1
+3 2, 1 (1) : 1
+3 3, 1 (1) : 1
