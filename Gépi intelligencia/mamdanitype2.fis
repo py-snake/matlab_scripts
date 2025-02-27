@@ -1,0 +1,47 @@
+[System]
+Name='mamdanitype2'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='input1hibajel'
+Range=[-1 1]
+NumMFs=3
+MF1='mf1negativ':'trapmf',[-1.1109785202864 -0.996420047732697 -0.514319809069212 -0.196897374701671]
+MF2='mf2zero':'trimf',[-0.605011933174224 0 0.597852028639618]
+MF3='mf3pozitiv':'trapmf',[0.206443914081146 0.5381861575179 1.044 1.377]
+
+[Input2]
+Name='input2derivalthiba'
+Range=[-1 1]
+NumMFs=3
+MF1='mf1negativ':'trimf',[-1.23747016706444 -0.986873508353222 -0.204057279236277]
+MF2='mf2zero':'trimf',[-0.605011933174224 0.0656324582338903 0.600238663484487]
+MF3='mf3pozitiv':'trimf',[0.208830548926014 0.997613365155131 1.4142800318218]
+
+[Output1]
+Name='output1kimenetszabalyozojel'
+Range=[-1 1]
+NumMFs=3
+MF1='mf1negativ':'trimf',[-1.28758949880668 -0.588305489260143 -0.201670644391408]
+MF2='mf2zero':'trimf',[-0.553898170246619 0.0226730310262528 0.585918854415274]
+MF3='mf3pozitiv':'trimf',[0.194311853619729 0.610978520286396 1.19689737470167]
+
+[Rules]
+1 1, 1 (1) : 1
+2 1, 1 (1) : 1
+3 1, 2 (1) : 1
+1 2, 1 (1) : 1
+2 2, 1 (1) : 1
+3 2, 1 (1) : 1
+1 3, 2 (1) : 1
+2 3, 1 (1) : 1
+3 3, 3 (1) : 1
