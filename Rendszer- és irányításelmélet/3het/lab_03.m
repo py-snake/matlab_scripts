@@ -37,11 +37,17 @@ Wre = feedback(1, Wo, -1)
 
 figure()
 step(Wre)
-stepinfo(Wre)
 
 % maradó hiba: 1-dcgain zártkör
-e = 1-dcgain((Wry)
+e = 1-dcgain(Wry)
 
 % A P-szabályozó nem tudja a maradék hibát eltűntetni, mert nincs benne
 % integrátor. Nincs 0 pólus a rendszerben.
+
+% stepinfo zárt körre
+info = stepinfo(Wry)
+
+% pólusok zárt rendszerben
+polusok = pole(Wry)
+% negatív valós pólus: stabil és beáll valahová
 
