@@ -2,3 +2,5 @@
 
 % fuzzyLogicDesigner
 
+% neuroFuzzyDesigner
+
