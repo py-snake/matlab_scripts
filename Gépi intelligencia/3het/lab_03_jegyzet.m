@@ -6,6 +6,7 @@
 
 % kockázatkezelés
 % probléma meghatározása, legalább 6 paraméterrel
+% fis fa használata
 % szétválaszható legyen két csoportra
 % két alrendszer összekapcsolása
 
