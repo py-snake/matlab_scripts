@@ -12,3 +12,11 @@
 
 % https://www.mathworks.com/help/fuzzy/build-fis-tree-using-fuzzy-logic-designer.html
 
+% Server disaster recovery key points
+% https://hostedsoftware.org/blog/server-disaster-recovery-risk-assessment-guide/
+
+% Datacenter optimal room temperatures and humidity
+% https://infrasensing.com/sensors/temperature_best_practices.asp
+% https://www.techtarget.com/searchdatacenter/tip/Data-center-temperature-and-humidity-guidelines
+% https://www.reddit.com/r/cissp/comments/zasrqe/data_center_humidity/
+
