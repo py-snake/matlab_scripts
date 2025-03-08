@@ -10,3 +10,5 @@
 % szétválaszható legyen két csoportra
 % két alrendszer összekapcsolása
 
+% https://www.mathworks.com/help/fuzzy/build-fis-tree-using-fuzzy-logic-designer.html
+
