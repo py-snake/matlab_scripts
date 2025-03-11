@@ -1,4 +1,4 @@
-% amfis fügvényközelítés
+% anfis fügvényközelítés
 % excel táblázatban 10db pont
 % pl e az x-ediken, nem pontos értékkel hanem kb
 % neurális háló tanítása és a függvény kirajzolása
@@ -19,4 +19,7 @@
 % https://infrasensing.com/sensors/temperature_best_practices.asp
 % https://www.techtarget.com/searchdatacenter/tip/Data-center-temperature-and-humidity-guidelines
 % https://www.reddit.com/r/cissp/comments/zasrqe/data_center_humidity/
+
+
+% https://www.mathworks.com/help/fuzzy/neuro-adaptive-learning-and-anfis.html
 
