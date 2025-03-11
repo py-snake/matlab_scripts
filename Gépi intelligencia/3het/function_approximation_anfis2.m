@@ -2,8 +2,19 @@ clear all
 close all
 clc
 
-%% Adatok létrehozása
-x = linspace(0.1, 1.0, 20);  % 20 pont az x tengelyen (0.1-től 1.0-ig egyenletesen elosztva)
+%%
+% Adatok létrehozása
+start_value = 0.1;  % Kezdőérték
+end_value = 1.0;    % Végérték
+num_points = 20;    % Pontok száma
+
+% Lépésköz kiszámítása
+step_size = (end_value - start_value) / (num_points - 1);
+
+% x értékek generálása
+x = start_value:step_size:end_value;
+
+% y értékek számítása
 y = exp(x);  % y = e^x értékek
 
 % Adatok megjelenítése
@@ -12,17 +23,21 @@ disp(x);
 disp('y értékek:');
 disp(y);
 
-%% Táblázat létrehozása és Excel fájlba írás
+%%
+% Táblázat létrehozása és Excel fájlba írás
 data_table = table(x', y', 'VariableNames', {'x', 'y'});
+delete('data.xlsx');
 writetable(data_table, 'data.xlsx');
 disp('Az adatok sikeresen ki lettek írva a data.xlsx fájlba.');
 
-%% Excel fájl beolvasása (opcionális)
+%%
+% Excel fájl beolvasása (opcionális)
 data_table = readtable('data.xlsx');
 x = data_table.x;
 y = data_table.y;
 
-%% ANFIS modell létrehozása és tanítása
+%%
+% ANFIS modell létrehozása és tanítása
 % Bemeneti-adat párok létrehozása
 data = [x, y];
 
@@ -41,11 +56,13 @@ fis = genfis(data(:, 1), data(:, 2), options);
 % ANFIS tanítása (csak 3 kimeneti argumentummal, mivel nincs validációs adat)
 [fis, train_error, step_size] = anfis(data, fis, epoch_n);
 
-%% Előrejelzés
+%%
+% Előrejelzés
 x_pred = linspace(0.1, 3, 100);  % 100 pont az x tengelyen
 y_pred = evalfis(x_pred', fis);  % Előrejelzés ANFIS-szel
 
-%% Eredmények ábrázolása
+%%
+% Eredmények ábrázolása
 figure;
 plot(x, y, 'bo', 'DisplayName', 'Eredeti adatok');
 hold on;
@@ -56,7 +73,8 @@ legend;
 title('e^x függvény közelítése ANFIS-szel');
 grid on;
 
-%% Új pont előrejelzése (pl. x = 1.1)
+%%
+% Új pont előrejelzése (pl. x = 1.1)
 x_new = 1.1;
 y_new = evalfis(x_new, fis);  % Előrejelzés ANFIS-szel
 
