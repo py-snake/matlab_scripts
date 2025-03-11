@@ -3,7 +3,7 @@ close all
 clc
 
 %% Adatok létrehozása
-x = linspace(0.1, 1.0, 200);  % 20 pont az x tengelyen (0.1-től 1.0-ig egyenletesen elosztva)
+x = linspace(0.1, 1.0, 20);  % 20 pont az x tengelyen (0.1-től 1.0-ig egyenletesen elosztva)
 y = exp(x);  % y = e^x értékek
 
 % Adatok megjelenítése
