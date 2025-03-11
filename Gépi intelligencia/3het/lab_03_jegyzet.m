@@ -4,6 +4,9 @@
 % neurális háló tanítása és a függvény kirajzolása
 % 11.pont függvényérték meghatározása neurális hálóval
 
+% https://www.mathworks.com/help/matlab/ref/xlswrite.html
+% https://www.mathworks.com/help/matlab/ref/xlsread.html
+
 % kockázatkezelés
 % probléma meghatározása, legalább 6 paraméterrel
 % fis fa használata
