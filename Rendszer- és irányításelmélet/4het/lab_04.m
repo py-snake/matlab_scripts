@@ -5,7 +5,7 @@ clc
 %%
 
 % szakasz átviteli függvénye
-Wp = tf(10, conv(conv([1, 1], [2, 1]]), [5, 1]))
+Wp = tf(10, conv(conv([1, 1], [2, 1]), [5, 1]))
 
 % szabályozó átviteli függvénye, P tag
 Ap = 1
@@ -54,10 +54,10 @@ T2 = info.SettlingTime
 % T2 % < 20 sec SettlingTime
 % túllövés < 24% Overshoot
 
-% Ap            % rad/sec   % 1
-% Wc            % fok       % 0.8
-% fi t          %           % 7.2
-% fi végtelen   %           % 0.09
-% túllövés      % százalék  % 76.9
-% T2%           % sec       % 100.27
+% Ap            % rad/sec   % 1         % 1.2   % 0.25
+% Wc            % fok       % 0.8       % 0.87  % 0.33
+% fi t          %           % 7.2       % 1.4   % 67.92
+% fi végtelen   %           % 0.09      % 1.87  % 0.28
+% túllövés      % százalék  % 76.9      % 85.86 % 23.73
+% T2%           % sec       % 100.27    % 458   % 16.91
 
