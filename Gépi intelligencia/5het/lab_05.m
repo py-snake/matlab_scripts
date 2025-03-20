@@ -1,3 +1,7 @@
+% https://www.geeksforgeeks.org/k-means-clustering-in-matlab/
+% https://www.mathworks.com/help/stats/kmeans.html
+% https://www.mathworks.com/help/stats/k-means-clustering.html
+
 clear all;
 close all;
 clc;
