@@ -1,0 +1,51 @@
+[System]
+Name='Klima_szabalyozo'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Temperature'
+Range=[15 30]
+NumMFs=3
+MF1='TooCold':'trapmf',[15 15 17 20]
+MF2='Comfortable':'trimf',[18 21 24]
+MF3='TooHot':'trapmf',[22 25 30 30]
+
+[Input2]
+Name='ChangeRate'
+Range=[-0.5 0.5]
+NumMFs=3
+MF1='FastCooling':'trapmf',[-0.5 -0.5 -0.3 -0.1]
+MF2='Stable':'trimf',[-0.2 0 0.2]
+MF3='FastHeating':'trapmf',[0.1 0.3 0.5 0.5]
+
+[Output1]
+Name='Power'
+Range=[-100 100]
+NumMFs=7
+MF1='MaxCooling':'trapmf',[-100 -100 -80 -60]
+MF2='MediumCooling':'trimf',[-70 -50 -30]
+MF3='LowCooling':'trimf',[-40 -20 0]
+MF4='Off':'trimf',[-10 0 10]
+MF5='LowHeating':'trimf',[0 20 40]
+MF6='MediumHeating':'trimf',[30 50 70]
+MF7='MaxHeating':'trapmf',[60.5291005291005 80.5291005291005 100.529100529101 100.529100529101]
+
+[Rules]
+1 1, 7 (1) : 1
+1 2, 6 (1) : 1
+1 3, 5 (1) : 1
+2 1, 4 (1) : 1
+2 2, 4 (1) : 1
+2 3, 4 (1) : 1
+3 1, 3 (1) : 1
+3 2, 2 (1) : 1
+3 3, 1 (1) : 1
