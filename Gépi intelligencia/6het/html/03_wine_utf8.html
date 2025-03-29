@@ -1,0 +1,670 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>03_wine_utf8</title>
+<meta name="generator" content="MATLAB 24.1">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2025-03-29">
+<meta name="DC.source" content="03_wine_utf8.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">Wine Dataset Klaszterez&eacute;s - 5 csoport az &ouml;sszes param&eacute;ter alapj&aacute;n</a>
+</li>
+<li>
+<a href="#2">1. Adatok bet&ouml;lt&eacute;se</a>
+</li>
+<li>
+<a href="#3">2. Adatelők&eacute;sz&iacute;t&eacute;s, param&eacute;terek meghat&aacute;roz&aacute;sa</a>
+</li>
+<li>
+<a href="#4">3. Adatok normaliz&aacute;l&aacute;sa</a>
+</li>
+<li>
+<a href="#5">4. Borok jellemzőinek &aacute;br&aacute;zol&aacute;sa oszlopdiagramokkal</a>
+</li>
+<li>
+<a href="#6">5. K-means klaszterez&eacute;s 5 klaszterre</a>
+</li>
+<li>
+<a href="#7">6. Hierarchikus klaszterez&eacute;s 5 klaszterre</a>
+</li>
+<li>
+<a href="#8">7. Eredm&eacute;nyek vizualiz&aacute;ci&oacute;ja</a>
+</li>
+<li>
+<a href="#9">8. Klaszterek jellemzői</a>
+</li>
+<li>
+<a href="#10">9. Klaszterk&ouml;zpontok vizualiz&aacute;ci&oacute;ja oszlopdiagramokkal</a>
+</li>
+<li>
+<a href="#11">10. Eredm&eacute;nyek export&aacute;l&aacute;sa</a>
+</li>
+</ul>
+</div>
+<h2 id="1">Wine Dataset Klaszterez&eacute;s - 5 csoport az &ouml;sszes param&eacute;ter alapj&aacute;n</h2>
+<pre class="codeinput">clear; close <span class="string">all</span>; clc;
+</pre>
+<pre class="codeoutput error">Error using evalmxdom&gt;instrumentAndRun (line 116)
+Error: Invalid text character. Check for unsupported symbol, invisible character, or pasting of non-ASCII characters.
+
+Error in evalmxdom (line 21)
+[data,text,laste] = instrumentAndRun(file,cellBoundaries,imageDir,imagePrefix,options);
+
+Error in publish</pre>
+<h2 id="2">1. Adatok bet&ouml;lt&eacute;se</h2>
+<pre class="codeinput">data = readtable(<span class="string">'winequality-red.csv'</span>);
+disp(<span class="string">'Az adathalmaz első n&eacute;h&aacute;ny sora:'</span>);
+disp(head(data));
+</pre>
+<h2 id="3">2. Adatelők&eacute;sz&iacute;t&eacute;s, param&eacute;terek meghat&aacute;roz&aacute;sa</h2>
+<p>Minős&eacute;g oszlop elt&aacute;vol&iacute;t&aacute;sa a dataset-ből</p>
+<pre class="codeinput">X = table2array(data(:,1:11));
+quality = data.quality;
+
+param_names = {<span class="string">'Fix savass&aacute;g'</span>, <span class="string">'Ill&eacute;kony savass&aacute;g'</span>, <span class="string">'Citromsav'</span>, <span class="keyword">...</span>
+               <span class="string">'Marad&eacute;k cukor'</span>, <span class="string">'Kloridok'</span>, <span class="string">'Szabad SO2'</span>, <span class="keyword">...</span>
+               <span class="string">'&Ouml;sszes SO2'</span>, <span class="string">'Sűrűs&eacute;g'</span>, <span class="string">'pH &eacute;rt&eacute;k'</span>, <span class="string">'Szulf&aacute;tok'</span>, <span class="string">'Alkohol'</span>};
+outputNames = {<span class="string">'Minős&eacute;g'</span>};
+</pre>
+<h2 id="4">3. Adatok normaliz&aacute;l&aacute;sa</h2>
+<pre class="codeinput">X_norm = zscore(X);
+</pre>
+<h2 id="5">4. Borok jellemzőinek &aacute;br&aacute;zol&aacute;sa oszlopdiagramokkal</h2>
+<pre class="codeinput">figure(<span class="string">'Position'</span>, [100, 100, 1200, 800]);
+
+<span class="comment">% &Aacute;tlagos &eacute;rt&eacute;kek sz&aacute;m&iacute;t&aacute;sa minős&eacute;gi szintek szerint</span>
+quality_levels = unique(quality);
+num_levels = length(quality_levels);
+colors = parula(num_levels); <span class="comment">% Sz&iacute;nsk&aacute;la minős&eacute;gi szintekhez</span>
+
+<span class="comment">% Alkohol tartalom minős&eacute;g szerint</span>
+subplot(2,3,1);
+mean_alcohol = zeros(num_levels, 1);
+<span class="keyword">for</span> i = 1:num_levels
+    mean_alcohol(i) = mean(X(quality == quality_levels(i), 11));
+<span class="keyword">end</span>
+bar(quality_levels, mean_alcohol, <span class="string">'FaceColor'</span>, <span class="string">'flat'</span>, <span class="string">'CData'</span>, colors);
+xlabel(<span class="string">'Minős&eacute;g'</span>);
+ylabel(<span class="string">'&Aacute;tlagos alkohol tartalom (%)'</span>);
+title(<span class="string">'Alkohol tartalom minős&eacute;g szerint'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% Fix &eacute;s ill&eacute;kony savass&aacute;g</span>
+subplot(2,3,2);
+mean_fixed_acid = zeros(num_levels, 1);
+mean_volatile_acid = zeros(num_levels, 1);
+<span class="keyword">for</span> i = 1:num_levels
+    mean_fixed_acid(i) = mean(X(quality == quality_levels(i), 1));
+    mean_volatile_acid(i) = mean(X(quality == quality_levels(i), 2));
+<span class="keyword">end</span>
+bar(quality_levels, [mean_fixed_acid, mean_volatile_acid], <span class="string">'grouped'</span>);
+xlabel(<span class="string">'Minős&eacute;g'</span>);
+ylabel(<span class="string">'&Aacute;tlagos savass&aacute;g (g/dm^3)'</span>);
+title(<span class="string">'Fix &eacute;s ill&eacute;kony savass&aacute;g'</span>);
+legend({<span class="string">'Fix savass&aacute;g'</span>, <span class="string">'Ill&eacute;kony savass&aacute;g'</span>}, <span class="string">'Location'</span>, <span class="string">'best'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% Citromsav &eacute;s pH</span>
+subplot(2,3,3);
+mean_citric = zeros(num_levels, 1);
+mean_ph = zeros(num_levels, 1);
+<span class="keyword">for</span> i = 1:num_levels
+    mean_citric(i) = mean(X(quality == quality_levels(i), 3));
+    mean_ph(i) = mean(X(quality == quality_levels(i), 9));
+<span class="keyword">end</span>
+yyaxis <span class="string">left</span>;
+bar(quality_levels, mean_citric);
+ylabel(<span class="string">'&Aacute;tlagos citromsav (g/dm^3)'</span>);
+yyaxis <span class="string">right</span>;
+bar(quality_levels, mean_ph);
+ylabel(<span class="string">'&Aacute;tlagos pH'</span>);
+xlabel(<span class="string">'Minős&eacute;g'</span>);
+title(<span class="string">'Citromsav &eacute;s pH &eacute;rt&eacute;k'</span>);
+legend({<span class="string">'Citromsav'</span>, <span class="string">'pH'</span>}, <span class="string">'Location'</span>, <span class="string">'best'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% Marad&eacute;k cukor &eacute;s sűrűs&eacute;g</span>
+subplot(2,3,4);
+mean_sugar = zeros(num_levels, 1);
+mean_density = zeros(num_levels, 1);
+<span class="keyword">for</span> i = 1:num_levels
+    mean_sugar(i) = mean(X(quality == quality_levels(i), 4));
+    mean_density(i) = mean(X(quality == quality_levels(i), 8));
+<span class="keyword">end</span>
+yyaxis <span class="string">left</span>;
+bar(quality_levels, mean_sugar);
+ylabel(<span class="string">'&Aacute;tlagos marad&eacute;k cukor (g/dm^3)'</span>);
+yyaxis <span class="string">right</span>;
+bar(quality_levels, mean_density);
+ylabel(<span class="string">'&Aacute;tlagos sűrűs&eacute;g (g/cm^3)'</span>);
+xlabel(<span class="string">'Minős&eacute;g'</span>);
+title(<span class="string">'Marad&eacute;k cukor &eacute;s sűrűs&eacute;g'</span>);
+legend({<span class="string">'Marad&eacute;k cukor'</span>, <span class="string">'Sűrűs&eacute;g'</span>}, <span class="string">'Location'</span>, <span class="string">'best'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% Szulf&aacute;tok &eacute;s kloridok</span>
+subplot(2,3,5);
+mean_sulphates = zeros(num_levels, 1);
+mean_chlorides = zeros(num_levels, 1);
+<span class="keyword">for</span> i = 1:num_levels
+    mean_sulphates(i) = mean(X(quality == quality_levels(i), 10));
+    mean_chlorides(i) = mean(X(quality == quality_levels(i), 5));
+<span class="keyword">end</span>
+bar(quality_levels, [mean_sulphates, mean_chlorides], <span class="string">'grouped'</span>);
+xlabel(<span class="string">'Minős&eacute;g'</span>);
+ylabel(<span class="string">'&Aacute;tlagos tartalom (g/dm^3)'</span>);
+title(<span class="string">'Szulf&aacute;tok &eacute;s kloridok'</span>);
+legend({<span class="string">'Szulf&aacute;tok'</span>, <span class="string">'Kloridok'</span>}, <span class="string">'Location'</span>, <span class="string">'best'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% SO2 t&iacute;pusok</span>
+subplot(2,3,6);
+mean_free_so2 = zeros(num_levels, 1);
+mean_total_so2 = zeros(num_levels, 1);
+<span class="keyword">for</span> i = 1:num_levels
+    mean_free_so2(i) = mean(X(quality == quality_levels(i), 6));
+    mean_total_so2(i) = mean(X(quality == quality_levels(i), 7));
+<span class="keyword">end</span>
+bar(quality_levels, [mean_free_so2, mean_total_so2], <span class="string">'grouped'</span>);
+xlabel(<span class="string">'Minős&eacute;g'</span>);
+ylabel(<span class="string">'&Aacute;tlagos SO2 (mg/dm^3)'</span>);
+title(<span class="string">'Szabad &eacute;s &ouml;sszes SO2'</span>);
+legend({<span class="string">'Szabad SO2'</span>, <span class="string">'&Ouml;sszes SO2'</span>}, <span class="string">'Location'</span>, <span class="string">'best'</span>);
+grid <span class="string">on</span>;
+
+sgtitle(<span class="string">'V&ouml;r&ouml;sborok jellemzőinek minős&eacute;g szerinti eloszl&aacute;sa'</span>, <span class="string">'FontSize'</span>, 16);
+
+<span class="comment">% &Ouml;sszes param&eacute;ter &aacute;tlagos &eacute;rt&eacute;kei minős&eacute;g szerint</span>
+figure(<span class="string">'Position'</span>, [100, 100, 1200, 600]);
+all_means = zeros(num_levels, size(X,2));
+<span class="keyword">for</span> i = 1:num_levels
+    all_means(i,:) = mean(X(quality == quality_levels(i), :));
+<span class="keyword">end</span>
+
+<span class="comment">% Normaliz&aacute;l&aacute;s</span>
+norm_means = (all_means - min(all_means)) ./ (max(all_means) - min(all_means));
+
+<span class="comment">% Heatmap</span>
+imagesc(norm_means);
+colorbar;
+set(gca, <span class="string">'XTick'</span>, 1:length(param_names), <span class="string">'XTickLabel'</span>, param_names);
+set(gca, <span class="string">'YTick'</span>, 1:num_levels, <span class="string">'YTickLabel'</span>, quality_levels);
+xtickangle(45);
+ylabel(<span class="string">'Minős&eacute;g'</span>);
+title(<span class="string">'Normaliz&aacute;lt param&eacute;ter&eacute;rt&eacute;kek minős&eacute;g szerint'</span>);
+</pre>
+<h2 id="6">5. K-means klaszterez&eacute;s 5 klaszterre</h2>
+<pre class="codeinput">rng(123);
+k = 5;
+[km_idx, km_centroids, km_sumd] = kmeans(X_norm, k, <span class="string">'Replicates'</span>, 20, <span class="string">'Display'</span>, <span class="string">'final'</span>);
+</pre>
+<h2 id="7">6. Hierarchikus klaszterez&eacute;s 5 klaszterre</h2>
+<p>T&aacute;vols&aacute;gm&aacute;trix sz&aacute;m&iacute;t&aacute;sa</p>
+<pre class="codeinput">distances = pdist(X_norm);
+
+<span class="comment">% Hierarchikus kapcsol&oacute;d&aacute;s</span>
+linkage_tree = linkage(distances, <span class="string">'ward'</span>);
+
+<span class="comment">% Klaszterek l&eacute;trehoz&aacute;sa</span>
+hc_idx = cluster(linkage_tree, <span class="string">'maxclust'</span>, k);
+
+<span class="comment">% Dendrogram megjelen&iacute;t&eacute;se</span>
+figure(<span class="string">'Position'</span>, [100, 100, 800, 600]);
+dendrogram(linkage_tree);
+title(<span class="string">'Hierarchikus klaszterez&eacute;s dendrogramja'</span>, <span class="string">'FontSize'</span>, 16);
+xlabel(<span class="string">'Mintaindex'</span>, <span class="string">'FontSize'</span>, 12);
+ylabel(<span class="string">'Euklideszi t&aacute;vols&aacute;g'</span>, <span class="string">'FontSize'</span>, 12);
+grid <span class="string">on</span>;
+
+<span class="comment">% V&aacute;g&aacute;si vonal hozz&aacute;ad&aacute;sa az 5 klaszterhez</span>
+hold <span class="string">on</span>;
+cutoff_line = median([linkage_tree(end-k+2,3) linkage_tree(end-k+1,3)]);
+line([0,size(X_norm,1)*1.1], [cutoff_line, cutoff_line], <span class="keyword">...</span>
+     <span class="string">'Color'</span>, <span class="string">'r'</span>, <span class="string">'LineStyle'</span>, <span class="string">'--'</span>, <span class="string">'LineWidth'</span>, 1.5);
+legend(<span class="string">'Klaszterhat&aacute;r'</span>, <span class="string">'Location'</span>, <span class="string">'northeast'</span>);
+hold <span class="string">off</span>;
+</pre>
+<h2 id="8">7. Eredm&eacute;nyek vizualiz&aacute;ci&oacute;ja</h2>
+<p>PCA alkalmaz&aacute;sa dimenzi&oacute;cs&ouml;kkent&eacute;shez</p>
+<pre class="codeinput">[coeff, score, ~, ~, explained] = pca(X_norm);
+
+figure(<span class="string">'Position'</span>, [100, 100, 1200, 500]);
+
+<span class="comment">% K-means eredm&eacute;nyek PCA t&eacute;rben</span>
+subplot(1,2,1);
+gscatter(score(:,1), score(:,2), km_idx, [], <span class="string">'o'</span>, 10);
+title(<span class="string">'K-means klaszterek (első k&eacute;t főkomponens)'</span>);
+xlabel([<span class="string">'PC1 ('</span> num2str(round(explained(1),2)) <span class="string">'%)'</span>]);
+ylabel([<span class="string">'PC2 ('</span> num2str(round(explained(2),2)) <span class="string">'%)'</span>]);
+legend(<span class="string">'Location'</span>, <span class="string">'best'</span>);
+
+<span class="comment">% Hierarchikus eredm&eacute;nyek PCA t&eacute;rben</span>
+subplot(1,2,2);
+gscatter(score(:,1), score(:,2), hc_idx, [], <span class="string">'o'</span>, 10);
+title(<span class="string">'Hierarchikus klaszterek (első k&eacute;t főkomponens)'</span>);
+xlabel([<span class="string">'PC1 ('</span> num2str(round(explained(1),2)) <span class="string">'%)'</span>]);
+ylabel([<span class="string">'PC2 ('</span> num2str(round(explained(2),2)) <span class="string">'%)'</span>]);
+legend(<span class="string">'Location'</span>, <span class="string">'best'</span>);
+</pre>
+<h2 id="9">8. Klaszterek jellemzői</h2>
+<pre class="codeinput">figure(<span class="string">'Position'</span>, [100, 100, 1400, 800]);
+
+<span class="comment">% Fontos param&eacute;terek kiv&aacute;laszt&aacute;sa</span>
+selected_params = [1 2 3 10 11]; <span class="comment">% Fix sav, Ill&eacute;kony sav, Citromsav, Szulf&aacute;tok, Alkohol</span>
+selected_names = param_names(selected_params);
+
+<span class="keyword">for</span> i = 1:length(selected_params)
+    subplot(2,3,i);
+    boxplot(X(:,selected_params(i)), km_idx);
+    title(selected_names{i});
+    xlabel(<span class="string">'Klaszter'</span>);
+    ylabel(<span class="string">'&Eacute;rt&eacute;k'</span>);
+    grid <span class="string">on</span>;
+<span class="keyword">end</span>
+
+<span class="comment">% Minős&eacute;g &aacute;bra</span>
+subplot(2,3,6);
+boxplot(quality, km_idx);
+title(<span class="string">'Minős&eacute;g'</span>);
+xlabel(<span class="string">'Klaszter'</span>);
+ylabel(<span class="string">'&Eacute;rt&eacute;k (1-10)'</span>);
+grid <span class="string">on</span>;
+
+sgtitle(<span class="string">'Klaszterenk&eacute;nti jellemzők eloszl&aacute;sa'</span>, <span class="string">'FontSize'</span>, 16);
+</pre>
+<h2 id="10">9. Klaszterk&ouml;zpontok vizualiz&aacute;ci&oacute;ja oszlopdiagramokkal</h2>
+<pre class="codeinput">figure(<span class="string">'Position'</span>, [100, 100, 1200, 800]);
+
+<span class="comment">% Denormaliz&aacute;ljuk a k&ouml;zpontokat az eredeti sk&aacute;l&aacute;ra</span>
+centroids_original = km_centroids .* std(X) + mean(X);
+
+<span class="comment">% Oszlopdiagramok k&eacute;sz&iacute;t&eacute;se minden klaszterhez</span>
+<span class="keyword">for</span> cluster = 1:k
+    subplot(2, ceil(k/2), cluster);
+    bar(centroids_original(cluster,:));
+    title([<span class="string">'Klaszter '</span> num2str(cluster) <span class="string">' jellemzői'</span>]);
+    set(gca, <span class="string">'XTick'</span>, 1:length(param_names), <span class="string">'XTickLabel'</span>, param_names);
+    xtickangle(45);
+    ylabel(<span class="string">'&Aacute;tlagos &eacute;rt&eacute;k'</span>);
+    grid <span class="string">on</span>;
+<span class="keyword">end</span>
+sgtitle(<span class="string">'Klaszterk&ouml;zpontok jellemzői'</span>, <span class="string">'FontSize'</span>, 16);
+
+<span class="comment">% &Ouml;sszes klaszter egy &aacute;br&aacute;n</span>
+
+figure(<span class="string">'Position'</span>, [100, 100, 1200, 600]);
+colors = lines(k); <span class="comment">% K&uuml;l&ouml;nb&ouml;ző sz&iacute;nek minden klaszterhez</span>
+
+<span class="comment">% Oszlopdiagram csoportos&iacute;tott m&oacute;don</span>
+<span class="keyword">for</span> param = 1:length(param_names)
+    subplot(3, 4, param);
+    bar(centroids_original(:,param), <span class="string">'FaceColor'</span>, <span class="string">'flat'</span>, <span class="string">'CData'</span>, colors);
+    title(param_names{param});
+    set(gca, <span class="string">'XTickLabel'</span>, 1:k);
+    xlabel(<span class="string">'Klaszter'</span>);
+    ylabel(<span class="string">'&Eacute;rt&eacute;k'</span>);
+    grid <span class="string">on</span>;
+
+    <span class="keyword">if</span> param == 12
+        <span class="keyword">break</span>;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+sgtitle(<span class="string">'Klaszterenk&eacute;nti param&eacute;ter&eacute;rt&eacute;kek &ouml;sszehasonl&iacute;t&aacute;sa'</span>, <span class="string">'FontSize'</span>, 16);
+</pre>
+<h2 id="11">10. Eredm&eacute;nyek export&aacute;l&aacute;sa</h2>
+<pre class="codeinput">data.KMeans_Cluster = km_idx;
+data.Hierarchical_Cluster = hc_idx;
+writetable(data, <span class="string">'wine_clusters.xlsx'</span>);
+</pre>
+<p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2024a</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%% Wine Dataset Klaszterezés - 5 csoport az összes paraméter alapján
+clear; close all; clc;
+
+%% 1. Adatok betöltése
+data = readtable('winequality-red.csv');
+disp('Az adathalmaz első néhány sora:');
+disp(head(data));
+
+%% 2. Adatelőkészítés, paraméterek meghatározása
+% Minőség oszlop eltávolítása a dataset-ből
+X = table2array(data(:,1:11));
+quality = data.quality;
+
+param_names = {'Fix savasság', 'Illékony savasság', 'Citromsav', ...
+               'Maradék cukor', 'Kloridok', 'Szabad SO2', ...
+               'Összes SO2', 'Sűrűség', 'pH érték', 'Szulfátok', 'Alkohol'};
+outputNames = {'Minőség'};
+
+%% 3. Adatok normalizálása
+X_norm = zscore(X);
+
+%% 4. Borok jellemzőinek ábrázolása oszlopdiagramokkal
+figure('Position', [100, 100, 1200, 800]);
+
+% Átlagos értékek számítása minőségi szintek szerint
+quality_levels = unique(quality);
+num_levels = length(quality_levels);
+colors = parula(num_levels); % Színskála minőségi szintekhez
+
+% Alkohol tartalom minőség szerint
+subplot(2,3,1);
+mean_alcohol = zeros(num_levels, 1);
+for i = 1:num_levels
+    mean_alcohol(i) = mean(X(quality == quality_levels(i), 11));
+end
+bar(quality_levels, mean_alcohol, 'FaceColor', 'flat', 'CData', colors);
+xlabel('Minőség');
+ylabel('Átlagos alkohol tartalom (%)');
+title('Alkohol tartalom minőség szerint');
+grid on;
+
+% Fix és illékony savasság
+subplot(2,3,2);
+mean_fixed_acid = zeros(num_levels, 1);
+mean_volatile_acid = zeros(num_levels, 1);
+for i = 1:num_levels
+    mean_fixed_acid(i) = mean(X(quality == quality_levels(i), 1));
+    mean_volatile_acid(i) = mean(X(quality == quality_levels(i), 2));
+end
+bar(quality_levels, [mean_fixed_acid, mean_volatile_acid], 'grouped');
+xlabel('Minőség');
+ylabel('Átlagos savasság (g/dm^3)');
+title('Fix és illékony savasság');
+legend({'Fix savasság', 'Illékony savasság'}, 'Location', 'best');
+grid on;
+
+% Citromsav és pH
+subplot(2,3,3);
+mean_citric = zeros(num_levels, 1);
+mean_ph = zeros(num_levels, 1);
+for i = 1:num_levels
+    mean_citric(i) = mean(X(quality == quality_levels(i), 3));
+    mean_ph(i) = mean(X(quality == quality_levels(i), 9));
+end
+yyaxis left;
+bar(quality_levels, mean_citric);
+ylabel('Átlagos citromsav (g/dm^3)');
+yyaxis right;
+bar(quality_levels, mean_ph);
+ylabel('Átlagos pH');
+xlabel('Minőség');
+title('Citromsav és pH érték');
+legend({'Citromsav', 'pH'}, 'Location', 'best');
+grid on;
+
+% Maradék cukor és sűrűség
+subplot(2,3,4);
+mean_sugar = zeros(num_levels, 1);
+mean_density = zeros(num_levels, 1);
+for i = 1:num_levels
+    mean_sugar(i) = mean(X(quality == quality_levels(i), 4));
+    mean_density(i) = mean(X(quality == quality_levels(i), 8));
+end
+yyaxis left;
+bar(quality_levels, mean_sugar);
+ylabel('Átlagos maradék cukor (g/dm^3)');
+yyaxis right;
+bar(quality_levels, mean_density);
+ylabel('Átlagos sűrűség (g/cm^3)');
+xlabel('Minőség');
+title('Maradék cukor és sűrűség');
+legend({'Maradék cukor', 'Sűrűség'}, 'Location', 'best');
+grid on;
+
+% Szulfátok és kloridok
+subplot(2,3,5);
+mean_sulphates = zeros(num_levels, 1);
+mean_chlorides = zeros(num_levels, 1);
+for i = 1:num_levels
+    mean_sulphates(i) = mean(X(quality == quality_levels(i), 10));
+    mean_chlorides(i) = mean(X(quality == quality_levels(i), 5));
+end
+bar(quality_levels, [mean_sulphates, mean_chlorides], 'grouped');
+xlabel('Minőség');
+ylabel('Átlagos tartalom (g/dm^3)');
+title('Szulfátok és kloridok');
+legend({'Szulfátok', 'Kloridok'}, 'Location', 'best');
+grid on;
+
+% SO2 típusok
+subplot(2,3,6);
+mean_free_so2 = zeros(num_levels, 1);
+mean_total_so2 = zeros(num_levels, 1);
+for i = 1:num_levels
+    mean_free_so2(i) = mean(X(quality == quality_levels(i), 6));
+    mean_total_so2(i) = mean(X(quality == quality_levels(i), 7));
+end
+bar(quality_levels, [mean_free_so2, mean_total_so2], 'grouped');
+xlabel('Minőség');
+ylabel('Átlagos SO2 (mg/dm^3)');
+title('Szabad és összes SO2');
+legend({'Szabad SO2', 'Összes SO2'}, 'Location', 'best');
+grid on;
+
+sgtitle('Vörösborok jellemzőinek minőség szerinti eloszlása', 'FontSize', 16);
+
+% Összes paraméter átlagos értékei minőség szerint
+figure('Position', [100, 100, 1200, 600]);
+all_means = zeros(num_levels, size(X,2));
+for i = 1:num_levels
+    all_means(i,:) = mean(X(quality == quality_levels(i), :));
+end
+
+% Normalizálás
+norm_means = (all_means - min(all_means)) ./ (max(all_means) - min(all_means));
+
+% Heatmap
+imagesc(norm_means);
+colorbar;
+set(gca, 'XTick', 1:length(param_names), 'XTickLabel', param_names);
+set(gca, 'YTick', 1:num_levels, 'YTickLabel', quality_levels);
+xtickangle(45);
+ylabel('Minőség');
+title('Normalizált paraméterértékek minőség szerint');
+
+%% 5. K-means klaszterezés 5 klaszterre
+rng(123);
+k = 5;
+[km_idx, km_centroids, km_sumd] = kmeans(X_norm, k, 'Replicates', 20, 'Display', 'final');
+
+%% 6. Hierarchikus klaszterezés 5 klaszterre
+% Távolságmátrix számítása
+distances = pdist(X_norm);
+
+% Hierarchikus kapcsolódás
+linkage_tree = linkage(distances, 'ward');
+
+% Klaszterek létrehozása
+hc_idx = cluster(linkage_tree, 'maxclust', k);
+
+% Dendrogram megjelenítése
+figure('Position', [100, 100, 800, 600]);
+dendrogram(linkage_tree);
+title('Hierarchikus klaszterezés dendrogramja', 'FontSize', 16);
+xlabel('Mintaindex', 'FontSize', 12);
+ylabel('Euklideszi távolság', 'FontSize', 12);
+grid on;
+
+% Vágási vonal hozzáadása az 5 klaszterhez
+hold on;
+cutoff_line = median([linkage_tree(end-k+2,3) linkage_tree(end-k+1,3)]);
+line([0,size(X_norm,1)*1.1], [cutoff_line, cutoff_line], ...
+     'Color', 'r', 'LineStyle', 'REPLACE_WITH_DASH_DASH', 'LineWidth', 1.5);
+legend('Klaszterhatár', 'Location', 'northeast');
+hold off;
+%% 7. Eredmények vizualizációja
+% PCA alkalmazása dimenziócsökkentéshez
+[coeff, score, ~, ~, explained] = pca(X_norm);
+
+figure('Position', [100, 100, 1200, 500]);
+
+% K-means eredmények PCA térben
+subplot(1,2,1);
+gscatter(score(:,1), score(:,2), km_idx, [], 'o', 10);
+title('K-means klaszterek (első két főkomponens)');
+xlabel(['PC1 (' num2str(round(explained(1),2)) '%)']);
+ylabel(['PC2 (' num2str(round(explained(2),2)) '%)']);
+legend('Location', 'best');
+
+% Hierarchikus eredmények PCA térben
+subplot(1,2,2);
+gscatter(score(:,1), score(:,2), hc_idx, [], 'o', 10);
+title('Hierarchikus klaszterek (első két főkomponens)');
+xlabel(['PC1 (' num2str(round(explained(1),2)) '%)']);
+ylabel(['PC2 (' num2str(round(explained(2),2)) '%)']);
+legend('Location', 'best');
+
+%% 8. Klaszterek jellemzői
+figure('Position', [100, 100, 1400, 800]);
+
+% Fontos paraméterek kiválasztása
+selected_params = [1 2 3 10 11]; % Fix sav, Illékony sav, Citromsav, Szulfátok, Alkohol
+selected_names = param_names(selected_params);
+
+for i = 1:length(selected_params)
+    subplot(2,3,i);
+    boxplot(X(:,selected_params(i)), km_idx);
+    title(selected_names{i});
+    xlabel('Klaszter');
+    ylabel('Érték');
+    grid on;
+end
+
+% Minőség ábra
+subplot(2,3,6);
+boxplot(quality, km_idx);
+title('Minőség');
+xlabel('Klaszter');
+ylabel('Érték (1-10)');
+grid on;
+
+sgtitle('Klaszterenkénti jellemzők eloszlása', 'FontSize', 16);
+
+%% 9. Klaszterközpontok vizualizációja oszlopdiagramokkal
+figure('Position', [100, 100, 1200, 800]);
+
+% Denormalizáljuk a központokat az eredeti skálára
+centroids_original = km_centroids .* std(X) + mean(X);
+
+% Oszlopdiagramok készítése minden klaszterhez
+for cluster = 1:k
+    subplot(2, ceil(k/2), cluster);
+    bar(centroids_original(cluster,:));
+    title(['Klaszter ' num2str(cluster) ' jellemzői']);
+    set(gca, 'XTick', 1:length(param_names), 'XTickLabel', param_names);
+    xtickangle(45);
+    ylabel('Átlagos érték');
+    grid on;
+end
+sgtitle('Klaszterközpontok jellemzői', 'FontSize', 16);
+
+% Összes klaszter egy ábrán
+
+figure('Position', [100, 100, 1200, 600]);
+colors = lines(k); % Különböző színek minden klaszterhez
+
+% Oszlopdiagram csoportosított módon
+for param = 1:length(param_names)
+    subplot(3, 4, param);
+    bar(centroids_original(:,param), 'FaceColor', 'flat', 'CData', colors);
+    title(param_names{param});
+    set(gca, 'XTickLabel', 1:k);
+    xlabel('Klaszter');
+    ylabel('Érték');
+    grid on;
+
+    if param == 12
+        break;
+    end
+end
+sgtitle('Klaszterenkénti paraméterértékek összehasonlítása', 'FontSize', 16);
+
+%% 10. Eredmények exportálása
+data.KMeans_Cluster = km_idx;
+data.Hierarchical_Cluster = hc_idx;
+writetable(data, 'wine_clusters.xlsx');
+
+##### SOURCE END #####
+-->
+</body>
+</html>

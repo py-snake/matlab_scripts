@@ -124,7 +124,7 @@ grid on;
 
 sgtitle('Vörösborok jellemzőinek minőség szerinti eloszlása', 'FontSize', 16);
 
-%% Összes paraméter átlagos értékei minőség szerint
+% Összes paraméter átlagos értékei minőség szerint
 figure('Position', [100, 100, 1200, 600]);
 all_means = zeros(num_levels, size(X,2));
 for i = 1:num_levels
@@ -158,6 +158,21 @@ linkage_tree = linkage(distances, 'ward');
 % Klaszterek létrehozása
 hc_idx = cluster(linkage_tree, 'maxclust', k);
 
+% Dendrogram megjelenítése
+figure('Position', [100, 100, 800, 600]);
+dendrogram(linkage_tree);
+title('Hierarchikus klaszterezés dendrogramja', 'FontSize', 16);
+xlabel('Mintaindex', 'FontSize', 12);
+ylabel('Euklideszi távolság', 'FontSize', 12);
+grid on;
+
+% Vágási vonal hozzáadása az 5 klaszterhez
+hold on;
+cutoff_line = median([linkage_tree(end-k+2,3) linkage_tree(end-k+1,3)]);
+line([0,size(X_norm,1)*1.1], [cutoff_line, cutoff_line], ...
+     'Color', 'r', 'LineStyle', '--', 'LineWidth', 1.5);
+legend('Klaszterhatár', 'Location', 'northeast');
+hold off;
 %% 7. Eredmények vizualizációja
 % PCA alkalmazása dimenziócsökkentéshez
 [coeff, score, ~, ~, explained] = pca(X_norm);
