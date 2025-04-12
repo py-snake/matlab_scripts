@@ -53,7 +53,7 @@ beallasIdo = infoWry.SettlingTime
 % fazistartalek = Pm
 
 % zárt kör maradó hibája
-e = 1- dcgain(Wry)
+e = 1 - dcgain(Wry)
 % eltűnt a maradó hiba, mert a szakaszban van egy 0 pólus
 % integrátor tag teszi be a 0 pólust
 
