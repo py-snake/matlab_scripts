@@ -11,7 +11,7 @@ p = pole(Wp)
 % stabil-e
 % a stabilitás határán van a 0 miatt, majdnem stabil mert minden valós rész negatív
 % azért stabil, mert minden valós rész negatív
-% komplex konjugált rész: az ugrásválaszan lenne lengés
+% komplex konjugált rész: az ugrásválaszon lenne lengés
 
 % statikus erősítés
 K = dcgain(Wp)
@@ -44,6 +44,7 @@ Wo = minreal(Wc * Wp)
 figure()
 margin(Wo)
 [Gm, Pm, wcg, wcp] = margin(Wo)
+fazistartalek = Pm
 
 % zárt kör
 Wry = feedback(Wo, 1, -1)
