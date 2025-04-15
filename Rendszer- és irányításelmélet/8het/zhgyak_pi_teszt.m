@@ -23,7 +23,7 @@ Wo = minreal(Wc * Wp)
 figure()
 margin(Wo)
 [Gm, Pm, wcg, wcp] = margin(Wo)
-fazostartalek = Pm
+fazistartalek = Pm
 
 Wry = feedback(Wo, 1, -1)
 
