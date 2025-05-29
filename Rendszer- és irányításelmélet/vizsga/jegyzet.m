@@ -3,12 +3,15 @@ close all
 clc
 
 %szakasz megadása
-b=100; %súrlódási együttható
-k=1000; %rugóállandó
-m=10000; %tehetetlenségi tömeg
+disp("Súrlódási együttható:")
+b=100 % súrlódási együttható
+disp("Rugóállandó:")
+k=1000 % rugóállandó
+disp("Tehetetlenségi tömeg:")
+m=10000 % tehetetlenségi tömeg
 
-A = [0 1;-k/m -b/m]
-B = [0;1/m]
+A = [0 1 ; -k/m -b/m]
+B = [0 ; 1/m]
 C = [1 0]
 D = 0
 
@@ -54,7 +57,7 @@ det(Mo) %ha nem nulla, akkor megfigyelhető a rendszer
 so1 = 10*sc1;
 so2 = 10*sc2;
 
-G = acker(A',C',[so1 so2])'
+G = acker(A',C',[so1 so2])' % a jelek a transzponálást jelentik
 
 
 %terhelésbecslő tervezése
