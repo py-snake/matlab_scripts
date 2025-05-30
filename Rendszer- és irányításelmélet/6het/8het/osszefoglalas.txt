@@ -1,0 +1,93 @@
+P tag
+Proporcionális tag, arányos a hibajellel, jelen
+Ap erősítés
+e hibajel
+u beavatkozó jel, szabályozó kimenete
+Időfüggvény u(t)=Ap*e(t)
+Átviteli függvény Wc(s)=Ap
+
+I tag
+Integrátor, múlt
+u beavatkozó jel, szabályozó kiemenete
+Ap erősítés
+e hibajel
+t pillanatnyi idő
+Ti integrálási idő
+Időfüggvény u(t)=(Ap/Ti)*integrate(e(x),x,0,t)
+Átviteli függvény Wc(s)=(Ap/Ti)*(1/s)
+
+D tag
+Deriváló tag, jövő
+u beavatkozó jel
+Ap erősítés
+e hibajel
+t pillanatnyi idő
+Td deriválási idő
+Időfüggvény u(t)=Ap*(Td/dt)*e(t)
+Átviteli függvény Wc(s)=Ap*sTd
+Tc szűrő időállandója
+Közelítő eset Wc(s)=Ap*(sTd/(1+sTc))
+
+PID szabályozó
+Átviteli függvény Wc(s)=Ap*((1)+(1/sTi)+(sTd/(sTc+1)))
+
+Wc szabályozó, controller
+Wp szakasz, plant
+Wo felnyitott kör, open
+Wo átviteli függvénye Wo=minreal(Wp*Wc)
+Wry zárt kör (r referencia y kimenet) Wry = feedback(Wo, 1, -1);
+Wru beavatkozó jel (r referencia u beavatkozó jel) Wru = feedback(Wc, Wp, -1)
+
+Vágási körfrekvencia: Az a frekvencia, ahol a felnyitott kör erősítése először eléri az 1 értéket (0dB).
+Fázistartalék: Az az érték, amennyivel a felnyitott kör fázistolása nagyobb -180foknál a vágási körfrekvencián.
+
+Ha a felnyitott kör fázistartaléka pozitív (fi t > 0), akkor a zárt kör stabil.
+Ha a felnyitott kör fázistartaléka nulla (fi t = 0), akkor a zárt kör a stabilitás határán van (oszcillál).
+Ha a felnyitott kör fázistartaléka negatív (fi t < 0), akkor a zárt kör instabil.
+
+Ha az erősítés nő, akkor a vágási körfrekvencia is nő, a fázistartalék pedig csökken. -> gyorsul a rendszer
+Ha az erősítés csökken, akkor a vágási körfrekvencia is csökken, a fázistartalék pedig nő. -> lassul a rendszer
+
+margin bode diagram
+Gm erősítéstartalék dB
+Pm fázistartalék fok
+Wcg frekvencia ahol a rendszer eléri a stabilitás határát
+Wcp vágási körfrekvencia
+
+
+Statikus erősítés dcgain
+Körerősítés egységnyi Ap esetén Wo felnyitott kör erősítése
+
+T = Td + Tc
+Td = N * Tc
+N = Td / Tc
+
+
+
+statikus erősítés s helyébe 0-át kell helyettesíteni, vagy határértéket nézni
+körerősítés a tört teteje
+
+0 maradó hiba
+-integráló tag miatt
+-null pólus miatt
+
+tf conv pole dcgain roots minreal margin step stepinfo 
+
+
+P_Wc = Ap
+PI_Wc = (Ap/Ti) * tf([Ti, 1], [1, 0])
+PD_Wc = Ap * tf([Td + Tc, 1], [Tc, 1])
+PID_Wc = (Ap / Ti) * tf([Ti * (Td + Tc), Ti + Tc, 1], conv([1, 0], [Tc, 1]))
+
+
+
+"P_Wc=Ap" "PI_Wc=(Ap/Ti)*tf([Ti 1], [1 0])" "PD_Wc=Ap*tf([Td+Tc 1], [Tc 1])" "PID_Wc=(Ap/Ti)*tf([Ti*(Td+Tc), Ti+Tc, 1], conv([1 0], [Tc 1]))"
+"T=Td+Tc" "Td=N*Tc" " N=Td/Tc" "Ti=T1+T2-Tc" "TcVec=roots([-(N+1), (T1+T2)*(N+1), -T1*T2])"
+"tf conv pole dcgain roots minreal margin step stepinfo"
+
+"P_Wc=Ap" "PI_Wc=(Ap/Ti)*tf([Ti 1], [1 0])" "PD_Wc=Ap*tf([Td+Tc 1], [Tc 1])" "PID_Wc=(Ap/Ti)*tf([Ti*(Td+Tc), Ti+Tc, 1], conv([1 0], [Tc 1]))" "T=Td+Tc" "Td=N*Tc" " N=Td/Tc" "Ti=T1+T2-Tc" "TcVec=roots([-(N+1), (T1+T2)*(N+1), -T1*T2])" "tf conv pole dcgain roots minreal margin step stepinfo"
+
+
+"P_Wc=Ap" "PI_Wc=(Ap/Ti)*tf([Ti 1], [1 0])" "PD_Wc=Ap*tf([Td+Tc 1], [Tc 1])" "PID_Wc=(Ap/Ti)*tf([Ti*(Td+Tc), Ti+Tc, 1], conv([1 0], [Tc 1]))" "T=Td+Tc" "Td=N*Tc" "N=Td/Tc" "Ti=T1+T2-Tc" "TcVec=roots([-(N+1), (T1+T2)*(N+1), -T1*T2])" "Tc=TcVec(2)" "Tc=T/(N+1)" "Wo=minreal(Wc*Wp)" "[Gm,Pm,wcg,wcp]=margin(Wo)" "tf conv pole dcgain roots minreal margin step stepinfo" "Wry=feedback(Wo,1,-1)" "Wru=feedback(Wc,Wp,-1)" "Wde=-feedback(Wp,Wc,-1)"
+
+
