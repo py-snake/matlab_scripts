@@ -77,3 +77,4 @@ so2 = 10 * sc2
 
 % Állapotmegfigyelő mátrix az Ackermann formulávan (A-GC)
 G = acker(A', C', [so1 so2])'
+
