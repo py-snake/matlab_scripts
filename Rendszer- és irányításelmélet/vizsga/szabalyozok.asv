@@ -154,6 +154,8 @@ Wde = -feedback(Wp, Wc, -1)
 figure()
 step(Wde)
 
+
+
 %% PID szabályozó
 
 clear all
