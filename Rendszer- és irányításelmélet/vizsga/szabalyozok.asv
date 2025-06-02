@@ -284,7 +284,7 @@ Wp = tf(20, conv(conv([12 1], [10 1]), [11 1]))
 T1 = 12
 T2 = 11
 N = 10
-Ap = 0.15
+Ap = 0.1
 
 
 TcVec = roots([-(N+1), (T1+T2)*(N+1), -T1*T2])
@@ -298,8 +298,4 @@ Wc = (Ap / Ti) * tf([Ti * (Tc + Td), Ti + Tc, 1], conv([1 0], [Tc 1]))
 
 Wo = minreal(Wc * Wp)
 
-[Gm, Pm, wcg, wcp] = margin(Wo)
-
-Wry = feedback(Wo, 1, -1)
-
-infoWry = stepinfo(Wry)
+Wry = feedbaclk
